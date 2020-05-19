@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 4.9.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 07-05-2020 a las 20:51:26
--- Versión del servidor: 10.3.22-MariaDB-1ubuntu1
--- Versión de PHP: 7.4.3
+-- Tiempo de generación: 19-05-2020 a las 01:23:48
+-- Versión del servidor: 5.7.30
+-- Versión de PHP: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `credito7_store`
+-- Base de datos: `kshopcom_store`
 --
 
 -- --------------------------------------------------------
@@ -40,7 +40,7 @@ CREATE TABLE `almacen` (
 --
 
 INSERT INTO `almacen` (`id`, `nombre`, `ubicacion`, `telefono`) VALUES
-(1, 'SERVICIO LOS CAFETOS SA DE CV (C2)', 'AUT. ORI-CORD KM. 290+500', '71 6 54 94');
+(1, 'ALMACEN NO. 1', 'UBICACION', '00000');
 
 -- --------------------------------------------------------
 
@@ -53,9 +53,9 @@ CREATE TABLE `annuities` (
   `client` int(11) NOT NULL,
   `concepto` varchar(254) NOT NULL,
   `price` decimal(65,4) NOT NULL,
-  `date_ini` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_last` datetime NOT NULL DEFAULT current_timestamp(),
-  `active` tinyint(1) NOT NULL DEFAULT 1
+  `date_ini` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_last` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -91,12 +91,12 @@ INSERT INTO `clients` (`id`, `nombre`, `direccion`, `telefono`, `descuento`, `rf
 CREATE TABLE `credits` (
   `id` int(11) NOT NULL,
   `client` int(11) NOT NULL,
-  `f_registro` datetime NOT NULL DEFAULT current_timestamp(),
+  `f_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `factura` varchar(254) NOT NULL,
   `adeudo` decimal(65,4) NOT NULL,
   `abono` decimal(65,4) NOT NULL,
   `dias_credit` int(11) NOT NULL,
-  `pay` tinyint(1) NOT NULL DEFAULT 0,
+  `pay` tinyint(1) NOT NULL DEFAULT '0',
   `sucursal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -153,7 +153,7 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`id`, `nombre`, `nombre_corto`, `direccion`, `correo`, `telefono`, `mision`, `vision`, `contacto`, `facebook`, `twitter`, `youtube`, `iva`, `footer`, `cfdi_lugare_expedicion`, `cfdi_rfc`, `cfdi_regimen`, `cfdi_cer`, `cfdi_key`, `cfdi_pass`) VALUES
-(1, 'CREDITOS CAFETOS', 'GRUPO SERVICIO LOS CAFETOS', 'Autopista Córdoba-Orizaba Km 290+750 S/N Córdoba, Ver. C.P. 94570 Colonia Las Cañas', 'CREDITOYCO.CAFETOS@GMAIL.COM', '271 71 6 15 16', 'EL MEJOR PRECIO DE LA REGIÓN ', 'QUIEN ES QUIEN EN LOS PRECIOS\r\n', 'CREDITO Y COBRANZA \r\nGRUPO CAFETOS\r\nTEL. 71 6 15 16\r\n', '', '', '', 16, '\r\nGRUPO SERVICIO LOS CAFETOS SA DE CV\r\nAUTOPISTA CÓRDOBA-ORIZABA KM 290+750 S/N\r\nCOLONIA LAS CAÑAS - CÓRDOBA, VER.\r\nC.P. 94570\r\n', '', '', '', '', '', '');
+(1, 'EMPRESA FICTICIA', 'EF', 'DIRECCION FICTICIA', 'DOCUMENTOS@CYBERCHOAPAS.COM', '9231200505', 'DESCRIBA AQUI SU MISION', 'DESCRIBA AQUI SU VISION', 'DESCRIBA AQUI SU CONTACTO', '', '', '', 16, 'PIE DE PAGINA\r\n', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -183,16 +183,16 @@ CREATE TABLE `folio_venta` (
   `open` tinyint(1) NOT NULL,
   `cobrado` decimal(65,4) DEFAULT NULL,
   `fecha_venta` datetime DEFAULT NULL,
-  `cut` tinyint(1) DEFAULT 0,
+  `cut` tinyint(1) DEFAULT '0',
   `sucursal` int(11) NOT NULL,
-  `cut_global` int(11) NOT NULL DEFAULT 0,
-  `iva` int(11) NOT NULL DEFAULT 0,
+  `cut_global` int(11) NOT NULL DEFAULT '0',
+  `iva` int(11) NOT NULL DEFAULT '0',
   `t_pago` varchar(254) NOT NULL DEFAULT 'Ninguno',
-  `pedido` tinyint(1) NOT NULL DEFAULT 0,
+  `pedido` tinyint(1) NOT NULL DEFAULT '0',
   `folio_venta_ini` varchar(254) DEFAULT NULL,
-  `cotizacion` tinyint(1) NOT NULL DEFAULT 0,
+  `cotizacion` tinyint(1) NOT NULL DEFAULT '0',
   `concepto` varchar(254) DEFAULT NULL,
-  `comision_pagada` tinyint(1) NOT NULL DEFAULT 0
+  `comision_pagada` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -215,14 +215,14 @@ CREATE TABLE `productos` (
   `foto1` varchar(254) NOT NULL,
   `foto2` varchar(254) NOT NULL,
   `foto3` varchar(254) NOT NULL,
-  `oferta` tinyint(1) NOT NULL DEFAULT 0,
-  `precio_normal` decimal(65,4) NOT NULL DEFAULT 0.0000,
-  `precio_oferta` decimal(65,4) NOT NULL DEFAULT 0.0000,
+  `oferta` tinyint(1) NOT NULL DEFAULT '0',
+  `precio_normal` decimal(65,4) NOT NULL DEFAULT '0.0000',
+  `precio_oferta` decimal(65,4) NOT NULL DEFAULT '0.0000',
   `stock` decimal(65,4) NOT NULL,
   `tiempo de entrega` varchar(254) NOT NULL,
   `stock_min` decimal(65,4) NOT NULL,
   `stock_max` decimal(65,4) NOT NULL,
-  `precio_costo` decimal(65,4) NOT NULL DEFAULT 0.0000,
+  `precio_costo` decimal(65,4) NOT NULL DEFAULT '0.0000',
   `cv` varchar(254) NOT NULL DEFAULT '01010101',
   `um` varchar(254) NOT NULL DEFAULT 'H87',
   `um_des` varchar(254) NOT NULL DEFAULT 'NA'
@@ -233,7 +233,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `no. De parte`, `nombre`, `descripcion`, `almacen`, `departamento`, `loc_almacen`, `marca`, `proveedor`, `foto0`, `foto1`, `foto2`, `foto3`, `oferta`, `precio_normal`, `precio_oferta`, `stock`, `tiempo de entrega`, `stock_min`, `stock_max`, `precio_costo`, `cv`, `um`, `um_des`) VALUES
-(1, '91', 'PREMIUM', 'PREMIUM', 1, 1, 'SERVICIO LOS CAFETOS SA DE CV (C2)', 'PEMEX', 'PEMEX', '', '', '', '', 0, '15.5900', '15.5900', '100000000000000000000000000000.0000', '', '0.0000', '1000000000000000000000000000.0000', '15.5900', '32012', 'LITRO', '15101515');
+(1, '91', 'PRODUCTO NO. 1', 'PRODUCTO', 1, 1, 'UBIC', 'PEMEX', 'PEMEX', 'product/product_img120200519012009.jpg', '', '', '', 0, 15.5900, 15.5900, 100000000000000000000000000000.0000, '', 0.0000, 1000000000000000000000000000.0000, 15.5900, '32012', 'LITRO', '15101515');
 
 -- --------------------------------------------------------
 
@@ -247,8 +247,8 @@ CREATE TABLE `productos_sub` (
   `almacen` int(11) NOT NULL,
   `stock` double NOT NULL,
   `ubicacion` varchar(254) NOT NULL,
-  `max` double NOT NULL DEFAULT 0,
-  `min` double NOT NULL DEFAULT 0
+  `max` double NOT NULL DEFAULT '0',
+  `min` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -301,7 +301,7 @@ CREATE TABLE `sucursales` (
 --
 
 INSERT INTO `sucursales` (`id`, `nombre`, `direccion`, `telefono`, `cfdi_serie`) VALUES
-(1, 'CAFETOS 1', 'CAFETOS1', '71 6 15 16', '');
+(1, 'SUCURSAL 1', 'DIRECCION ', '0000', 'A');
 
 -- --------------------------------------------------------
 
@@ -334,27 +334,27 @@ CREATE TABLE `users` (
   `password` varchar(254) NOT NULL,
   `nombre` varchar(254) NOT NULL,
   `imagen` varchar(254) NOT NULL,
-  `product_add` tinyint(1) NOT NULL DEFAULT 0,
-  `product_gest` tinyint(1) NOT NULL DEFAULT 0,
-  `gen_orden_compra` tinyint(1) NOT NULL DEFAULT 0,
-  `client_add` tinyint(1) NOT NULL DEFAULT 0,
-  `client_guest` tinyint(1) NOT NULL DEFAULT 0,
-  `almacen_add` tinyint(1) NOT NULL DEFAULT 0,
-  `almacen_guest` tinyint(1) NOT NULL DEFAULT 0,
-  `depa_add` tinyint(1) NOT NULL DEFAULT 0,
-  `depa_guest` tinyint(1) NOT NULL DEFAULT 0,
-  `propiedades` tinyint(1) NOT NULL DEFAULT 0,
-  `usuarios` tinyint(1) NOT NULL DEFAULT 0,
-  `finanzas` tinyint(1) NOT NULL DEFAULT 0,
+  `product_add` tinyint(1) NOT NULL DEFAULT '0',
+  `product_gest` tinyint(1) NOT NULL DEFAULT '0',
+  `gen_orden_compra` tinyint(1) NOT NULL DEFAULT '0',
+  `client_add` tinyint(1) NOT NULL DEFAULT '0',
+  `client_guest` tinyint(1) NOT NULL DEFAULT '0',
+  `almacen_add` tinyint(1) NOT NULL DEFAULT '0',
+  `almacen_guest` tinyint(1) NOT NULL DEFAULT '0',
+  `depa_add` tinyint(1) NOT NULL DEFAULT '0',
+  `depa_guest` tinyint(1) NOT NULL DEFAULT '0',
+  `propiedades` tinyint(1) NOT NULL DEFAULT '0',
+  `usuarios` tinyint(1) NOT NULL DEFAULT '0',
+  `finanzas` tinyint(1) NOT NULL DEFAULT '0',
   `descripcion` longtext NOT NULL,
   `sucursal` int(11) NOT NULL,
   `change_suc` tinyint(1) NOT NULL,
-  `sucursal_gest` tinyint(1) NOT NULL DEFAULT 0,
-  `caja` tinyint(1) NOT NULL DEFAULT 0,
-  `super_pedidos` tinyint(1) NOT NULL DEFAULT 0,
-  `comision` int(11) DEFAULT 5,
-  `sueldo` float NOT NULL DEFAULT 0,
-  `vtd_pg` tinyint(1) NOT NULL DEFAULT 0
+  `sucursal_gest` tinyint(1) NOT NULL DEFAULT '0',
+  `caja` tinyint(1) NOT NULL DEFAULT '0',
+  `super_pedidos` tinyint(1) NOT NULL DEFAULT '0',
+  `comision` int(11) DEFAULT '5',
+  `sueldo` float NOT NULL DEFAULT '0',
+  `vtd_pg` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -362,7 +362,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `nombre`, `imagen`, `product_add`, `product_gest`, `gen_orden_compra`, `client_add`, `client_guest`, `almacen_add`, `almacen_guest`, `depa_add`, `depa_guest`, `propiedades`, `usuarios`, `finanzas`, `descripcion`, `sucursal`, `change_suc`, `sucursal_gest`, `caja`, `super_pedidos`, `comision`, `sueldo`, `vtd_pg`) VALUES
-(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'SUPER USER', 'users/usuario20200428130857.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'ADMINISTRADOR', 13, 1, 1, 1, 1, 5, 1800, 1);
+(1, 'root', '63a9f0ea7bb98050796b649e85481845', 'SUPER USER', 'users/usuario20200519011824.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 'ADMINISTRADOR', 1, 1, 1, 1, 1, 5, 1800, 1);
 
 --
 -- Índices para tablas volcadas
@@ -551,7 +551,7 @@ ALTER TABLE `sucursales`
 -- AUTO_INCREMENT de la tabla `sucursal_almacen`
 --
 ALTER TABLE `sucursal_almacen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

@@ -3,8 +3,8 @@
 	function db_conectar ()
 	{
 		$host = "localhost";
-		$user = "kshopcom__user";
-		$password = "O$l[$5#mF@D?";
+		$user = "kshopcom_user";
+		$password = 'O$l[$5#mF@D?';
 		$db = "kshopcom_store";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
@@ -18,7 +18,7 @@
 	
 	function static_empresa_nombre ()
 	{
-		return "Creditos cafetos";
+		return "K-SHOP";
 	}
 
 	function static_empresa_email()
