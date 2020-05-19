@@ -4,7 +4,7 @@
 	{
 		$host = "localhost";
 		$user = "kshopcom__user";
-		$password = 'O$l[$5#mF@D?';
+		$password = "O$l[$5#mF@D?";
 		$db = "kshopcom_store";
 		$coneccion = new mysqli($host,$user,$password,$db);
 		mysqli_query($coneccion, "SET NAMES 'utf8'");
