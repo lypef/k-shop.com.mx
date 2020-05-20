@@ -29,7 +29,7 @@
 	
 	function ColorBarrReport ()
 	{
-		return "#45916b ";
+		return "#4388c2 ";
 	}
 
 	function ReportCotTranfers ()
